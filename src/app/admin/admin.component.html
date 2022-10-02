@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <h2>{{this.showMeetings ? "Meetings" : "Users"}} <b>Management</b></h2>
+                        </div>
+                        <div class="col-xs-7">
+                            <button class="btn btn-primary" (click)="showMeetings=false">Manage Users</button>
+                            <button class="btn btn-primary" (click)="showMeetings=true">Manage Meetings</button>
+                        </div>
+                    </div>
+                </div>
+                <table *ngIf="showMeetings" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Creator</th>
+                            <th>Subject</th>
+                            <th>Date and Time</th>
+                            <th>Attendees</th>
+                            <th>Duration</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="showMeetings">
+                        <tr *ngFor="let meeting of meetingList;let indexOfelement=index">
+                            <td>{{indexOfelement+1}}</td>
+                            <td> {{meeting.creator}}</td>
+                            <td>{{meeting.subject}}</td>
+                            <td>{{meeting.dateTime}}</td>
+                            <td>{{meeting.invokedEmails.split(';').length}}</td>
+                            <td>{{meeting.duration}}</td>
+                            <td>{{meeting.location}}</td>
+                            <td>{{meeting.description}}</td>
+                            <td>
+                                <button class="btn btn-primary" (click)="editMeeting(meeting)">Edit</button>
+                            </td>
+                            <td><button class="btn btn-danger" (click)="deleteMeeting(meeting.id)">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table *ngIf="!showMeetings" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Manage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of userList;let indexOfelement=index">
+                            <td>{{indexOfelement+1}}</td>
+                            <td> {{user.username}}</td>
+                            <td>{{user.email}}</td>
+                            <td>
+                                <button class="btn btn-primary" (click)="editUser(user)">Edit</button>
+                            </td>
+                            <td><button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <form *ngIf="showeditUser" [formGroup]="formUser" (submit)="editMyUser()" class="row justify-content-md-center ">
+
+        <div class="col-md-auto">
+            <div class="card " style="width: 30rem;">
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input class="form-control" formControlName="username" type="text">
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="email" class="form-label">Email</label>
+                        <input class="form-control" formControlName="email" type="text">
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-outline-primary" type="submit">Edit</button>
+                        <button class="btn btn-outline-primary" (click)="cancelEditUser()">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <form *ngIf="showeditMeeting" [formGroup]="formMeeting" (submit)="editMyMeeting()" class="row justify-content-md-center ">
+
+        <div class="col-md-auto">
+            <div class="card " style="width: 30rem;">
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input class="form-control" formControlName="subject" type="text">
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="dateTime" class="form-label">Date and Time</label>
+                        <input class="form-control" formControlName="dateTime" type="text">
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="invokedEmails" class="form-label">Attendees</label>
+                        <input class="form-control" formControlName="invokedEmails" type="text">
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="duration" class="form-label">Duration</label>
+                        <input class="form-control" formControlName="duration" type="text">
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="location" class="form-label">Location</label>
+                        <input class="form-control" formControlName="location" type="text">
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="description" class="form-label">Description</label>
+                        <input class="form-control" formControlName="description" type="text">
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-outline-primary" type="submit">Edit</button>
+                        <button class="btn btn-outline-primary" (click)="cancelEditMeeting()">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

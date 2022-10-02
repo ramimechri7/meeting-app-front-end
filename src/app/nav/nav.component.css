@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Averia+Serif+Libre|Bubblegum+Sans|Caveat+Brush|Chewy|Lobster+Two');
+.navbar {
+    border: 0;
+    z-index: 9999;
+    letter-spacing: 4px;
+}
+
+.nav-item {
+    line-height: 50px;
+    margin: 15px;
+}
+
+body {
+    font-family: "Averia", sans-serif;
+    font-size: larger;
+}
+
+.nav-item a {
+    font-size: large;
+}
+
+.btn {
+    color: white !important;
+    margin-top: 9px !important;
+}

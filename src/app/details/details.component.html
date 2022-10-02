@@ -1,0 +1,94 @@
+<title>Details</title>
+
+<section class="h-100 h-custom" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8 col-xl-6">
+                <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
+                    <div class="card-body p-5">
+
+                        <p class="lead fw-bold mb-5" style="color: #f37a27;">Meeting created by Mr/Mrs {{meeting.creator}}</p>
+
+                        <div class="row">
+                            <div class="col mb-3">
+                                <p class="small text-muted mb-1">Subject</p>
+                                <p>{{meeting.subject}}</p>
+                            </div>
+                            <div class="col mb-3">
+                                <p class="small text-muted mb-1">Date</p>
+                                <p>{{meeting.dateTime}}</p>
+                            </div>
+                        </div>
+
+                        <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
+                            <div class="row">
+                                <div class="col-md-8 col-lg-9">
+                                    <p>Attendees</p>
+                                </div>
+                                <div class="col-md-4 col-lg-3">
+                                    {{attendeesNumber}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-lg-9">
+                                    <p class="mb-0">Location</p>
+                                </div>
+                                <div class="col-md-4 col-lg-3">
+                                    <p class="mb-0">{{meeting.location}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-lg-9">
+                                    <p class="mb-0">Duration</p>
+                                </div>
+                                <div class="col-md-4 col-lg-3">
+                                    <p class="mb-0">{{meeting.duration}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="column">
+                                    <div class="col-md-3 col-lg-3">
+                                        <p class="mb-0">Description</p>
+                                    </div>
+                                    <div id="description" class="md-form amber-textarea active-amber-textarea-2">
+                                        <textarea id="form16" class="md-textarea form-control" rows="3" readonly>{{meeting.description}}</textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row my-4">
+                            <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
+
+                            </div>
+                        </div>
+
+                        <p class="lead fw-bold mb-4 pb-2" style="color: #f37a27;">Manage</p>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="horizontal-timeline">
+                                    <div class="container">
+                                        <ul class="list-inline items d-flex justify-content-between">
+                                            <button class="btn btn-success" *ngIf="this.userIsCreator" (click)="EditMeeting()">Edit</button>
+                                            <button class="btn btn-danger" *ngIf="this.userIsCreator" (click)="DeleteMeeting(meeting.id)">Delete</button>
+                                            <button class="btn btn-primary" routerLink="/home">Cancel</button>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+<br><br>

@@ -1,0 +1,54 @@
+.horizontal-timeline .items {
+    border-top: 2px solid #ddd;
+}
+
+.horizontal-timeline .items .items-list {
+    position: relative;
+    margin-right: 0;
+}
+
+.horizontal-timeline .items .items-list:before {
+    content: "";
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #ddd;
+    top: 0;
+    margin-top: -5px;
+}
+
+.horizontal-timeline .items .items-list {
+    padding-top: 15px;
+}
+
+.btn {
+    margin-top: 25px;
+    background-color: orange !important;
+    border-color: orange !important;
+    width: 100px !important;
+}
+
+#btn_see {
+    margin-top: 0px !important;
+    width: 100px !important;
+    color: white;
+}
+
+.row {
+    padding: 15px !important;
+}
+
+#description {
+    margin-top: 30px;
+}
+
+.list-email {
+    font-style: italic;
+}
+
+.list-address {
+    margin-top: -14px;
+    margin-bottom: 0px;
+    font-size: 12px;
+}
